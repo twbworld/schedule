@@ -1,0 +1,21 @@
+name: ql
+on:
+  workflow_dispatch: #github页面手动触发
+  schedule:
+    - cron: '0 16 * * 1' #注意,这是UTC时间,比北京时间晚8个小时
+jobs:
+  update:
+    runs-on: ubuntu-20.04 #虚拟环境(github提供)
+    env:
+      TZ: Asia/Shanghai
+    steps:
+
+      - name: update-jd
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            docker exec qinglong /bin/bash -c 'ql repo https://github.com/zero205/JD_tencent_scf.git "jd_|jx_|getJDCookie" "backUp|icon" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign" "main" && exit'
