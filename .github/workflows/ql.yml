@@ -19,3 +19,4 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             docker exec qinglong /bin/bash -c 'ql repo https://github.com/zero205/JD_tencent_scf.git "jd_|jx_|getJDCookie" "backUp|icon" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign" "main" && exit'
+            docker exec qinglong /bin/bash -c 'ql repo https://github.com/twbworld/NeteaseCloudMusicTasks.git "index.py" "" "py" "main" && exit'
